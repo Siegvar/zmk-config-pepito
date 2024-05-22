@@ -39,6 +39,28 @@
         };
     };
 
+    macros {
+        macro_del_word: macro_del_word {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp BSPC>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+    };
+
+    behaviors {
+        td_bspc: tap_dance_bspc {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp BSPC>, <&macro_del_word>;
+        };
+    };
+
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -48,7 +70,7 @@
 &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T                            &kp Y      &kp U      &kp I      &kp O      &kp P     &kp MINUS
 &kp LSHFT  &kp A      &kp S      &kp D      &kp F      &kp G                            &kp H      &kp J      &kp K      &kp L      &kp SEMI  &kp SQT
 &kp LCTRL  &kp Z      &kp X      &kp C      &kp V      &kp B                            &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH  &kp GRAVE
-                                    &kp LGUI  &kp LALT  &kp SPACE  &mo 1    &kp RET  &mo 2  &kp BSPC  &lt 4 KP_DOT
+                                    &kp LGUI  &kp LALT  &kp SPACE  &mo 1    &kp RET  &mo 2  &td_bspc  &lt 4 KP_DOT
             >;
         };
 
@@ -57,8 +79,8 @@
             bindings = <
 &kp ESC    &kp N1     &kp N2     &kp N3     &kp N4     &kp N5                           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0    &trans
 &trans     &kp EXCL   &kp MINUS  &kp PLUS   &kp EQUAL  &kp AMPS                         &kp KP_NUM &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp BSPC  &kp RSHFT
-&trans     &kp CARET  &kp FSLH   &kp ASTRK  &kp BSLH   &kp HASH                         &trans     &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp RALT  &kp RCTRL
-                                 &trans     &trans     &trans     &trans      &trans    &trans     &kp KP_N0  &trans
+&trans     &kp CARET  &kp FSLH   &kp ASTRK  &kp BSLH   &kp HASH                         &kp INS    &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp RALT  &kp RCTRL
+                                 &trans     &mkp MB1   &mkp MB2   &trans      &trans    &trans     &kp KP_N0  &trans
             >;
         };
 
@@ -67,7 +89,7 @@
             bindings = <
 &trans     &kp F1     &kp F2     &kp F3     &kp F4     &kp F5                           &kp PG_UP  &kp HOME   &kp UP     &kp END    &kp LPAR  &kp RPAR
 &trans     &kp F6     &kp F7     &kp F8     &kp F9     &kp F10                          &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT  &kp LBKT  &kp RBKT
-&trans     &trans     &trans     &trans     &kp F11    &kp F12                          &kp INS    &kp BSPC   &kp DEL    &kp KP_DOT &kp RALT  &kp RCTRL
+&trans     &trans     &trans     &trans     &kp F11    &kp F12                          &kp DEL    &mkp MB1   &mkp MB2   &kp KP_DOT &kp RALT  &kp RCTRL
                                  &trans     &trans     &trans     &trans      &trans    &trans     &trans     &trans
             >;
         };
@@ -76,8 +98,8 @@
             display-name = " Adjust";
             bindings = <
 &trans     &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT                        &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR   &kp RPAR  &kp MINUS
-&trans     &none      &none      &none      &none      &kp VOLUP                        &none      &kp LBRC   &kp RBRC   &none      &none     &kp RSHFT
-&trans     &none      &none      &none      &none      &kp VOLDN                        &none      &kp LBKT   &kp RBKT   &none      &none     &kp RCTRL
+&trans     &none      &none      &none      &none      &kp VOLUP                        &kp KP_NUM &kp LBRC   &kp RBRC   &none      &none     &kp RSHFT
+&trans     &none      &none      &none      &none      &kp VOLDN                        &kp INS    &kp LBKT   &kp RBKT   &none      &none     &kp RCTRL
                                  &trans     &trans     &trans     &trans      &trans    &trans     &trans     &trans
             >;
         };
