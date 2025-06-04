@@ -116,7 +116,7 @@
             bindings = <
 &b_off      &bt BT0     &bt BT1  &bt BT2    &bt BT3    &bt BT4                          &bt BT0    &bt BT1    &bt BT2    &bt BT3    &bt BT4    &b_off
 &none       BOOTLDR     SYSRSET  &none      &none      &none                            &none      &none      &none      SYSRSET    BOOTLDR    &none
-&none       &none       &none    &none      &none      &none                            &none      &none      &none      &none      &none      &none
+&none       &none       &none    &none      &none      &none                            &none      &none      &none      &none      &none      &ext_power EP_OFF
                                  &none      &bt BT_CLR &trans     &trans      &trans    &trans     &bt BT_CLR &none 
             >;
         };
